@@ -153,5 +153,18 @@ namespace LiveChatApi
                 return goals;
             }
         }
+
+        private Greetings greetings = null;
+        public Greetings Greetings
+        {
+            get
+            {
+                if (greetings == null)
+                {
+                    greetings = new Greetings(this);
+                }
+                return greetings;
+            }
+        }
     }
 }

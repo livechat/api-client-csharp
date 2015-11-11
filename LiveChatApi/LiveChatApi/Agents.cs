@@ -24,7 +24,7 @@ namespace LiveChatApi
                 string uri = "agents";
                 if (status.Length > 0)
                 {
-                    uri = string.Format("agents?status={0}", HttpUtility.UrlEncode(status));
+                    uri += string.Format("?status={0}", HttpUtility.UrlEncode(status));
                 }
 
                 result = await Api.Get(uri);

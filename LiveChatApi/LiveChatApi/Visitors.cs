@@ -55,12 +55,13 @@ namespace LiveChatApi
             {
                 string uri = string.Format("visitors/{0}/details", HttpUtility.UrlEncode(visitorID));
                 string content = string.Format("license_id={0}&token={1}&id={2}", HttpUtility.UrlEncode(licenseID), HttpUtility.UrlEncode(token), HttpUtility.UrlEncode(id));
-                int i = 0;
                 if (fields != null && fields.Count > 0)
                 {
+                    int i = 0;
                     foreach (var keyValuePair in fields)
                     {
                         content += string.Format("&field[{0}][{1}]={2}", i, HttpUtility.UrlEncode(keyValuePair.Key), HttpUtility.UrlEncode(keyValuePair.Value));
+                        i++;
                     }
                 }
                 if (icon.Length > 0)

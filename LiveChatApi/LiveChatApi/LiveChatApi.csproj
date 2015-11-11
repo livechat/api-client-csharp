@@ -50,6 +50,7 @@
     <Compile Include="Chats.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Goals.cs" />
+    <Compile Include="Greetings.cs" />
     <Compile Include="IApiHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

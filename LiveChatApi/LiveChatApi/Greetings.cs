@@ -7,11 +7,11 @@ using System.Web;
 
 namespace LiveChatApi
 {
-    class CannedResponses
+    class Greetings
     {
         private IApiHandler Api;
 
-        public CannedResponses(IApiHandler api)
+        public Greetings(IApiHandler api)
         {
             Api = api;
         }
@@ -21,7 +21,7 @@ namespace LiveChatApi
             string result = "";
             try
             {
-                string uri = "canned_responses";
+                string uri = "greetings";
                 if (group.Length > 0)
                 {
                     uri += string.Format("?group={0}", HttpUtility.UrlEncode(group));
@@ -31,99 +31,100 @@ namespace LiveChatApi
             }
             catch (Exception ex)
             {
-                Console.WriteLine("CannedResponses.List exception {0}", ex.ToString());
+                Console.WriteLine("Greetings.List exception {0}", ex.ToString());
             }
             return result;
         }
 
-        public async Task<string> Get(string responseID)
+        public async Task<string> Get(string greetingID)
         {
             string result = "";
             try
             {
-                string uri = string.Format("canned_responses/{0}", HttpUtility.UrlEncode(responseID));
+                string uri = string.Format("greetings/{0}", HttpUtility.UrlEncode(greetingID));
 
                 result = await Api.Get(uri);
             }
             catch (Exception ex)
             {
-                Console.WriteLine("CannedResponses.Get exception {0}", ex.ToString());
+                Console.WriteLine("Greetings.Get exception {0}", ex.ToString());
             }
             return result;
         }
 
-        public async Task<string> Add(string text, string[] tags, string group = "")
+        public async Task<string> Add(string name, Dictionary<string, string>[] rules, string group = "")
         {
             string result = "";
             try
             {
-                string uri = string.Format("canned_responses");
-                string content = string.Format("text={0}", HttpUtility.UrlEncode(text));
-                if (tags != null && tags.Count() > 0)
+                string uri = "greetings";
+                string content = string.Format("name={0}", HttpUtility.UrlEncode(name));
+                if (rules != null && rules.Count() > 0)
                 {
-                    foreach (var tag in tags)
+                    int i = 0; 
+                    foreach (var rule in rules)
                     {
-                        content += string.Format("&tags[]={0}", HttpUtility.UrlEncode(tag));
+                        foreach (var keyValuePair in rule)
+                        {
+                            content += string.Format("&rules[{0}][{1}]={2}", i, keyValuePair.Key, HttpUtility.UrlEncode(keyValuePair.Value));
+                        }
+                        i++;
                     }
                 }
                 if (group.Length > 0)
                 {
-                    content += string.Format("&group={0}", HttpUtility.UrlEncode(text));
+                    content += string.Format("&group={0}", HttpUtility.UrlEncode(group));
                 }
 
                 result = await Api.Post(uri, content);
             }
             catch (Exception ex)
             {
-                Console.WriteLine("CannedResponses.Add exception {0}", ex.ToString());
+                Console.WriteLine("Greetings.Get exception {0}", ex.ToString());
             }
             return result;
         }
 
-        public async Task<string> Update(string responseID, string[] tags, string text = "")
+        public async Task<string> Update(string greetingID, Dictionary<string, string> parameters)
         {
             string result = "";
             try
             {
-                string uri = string.Format("canned_responses/{0}", HttpUtility.UrlEncode(responseID));
+                string uri = string.Format("greetings/{0}", HttpUtility.UrlEncode(greetingID));
                 string content = "";
-                if (text.Length > 0)
+                if (parameters != null && parameters.Count > 0)
                 {
-                    content = string.Format("text={0}", HttpUtility.UrlEncode(text));
-                }
-                if (tags != null & tags.Count() > 0)
-                {
-                    foreach (var tag in tags)
+                    foreach (var keyValuePair in parameters)
                     {
                         if (content.Length > 0)
                         {
                             content += "&";
                         }
-                        content += string.Format("tags[]={0}", HttpUtility.UrlEncode(tag));
+                        content += string.Format("{0}={1}", keyValuePair.Key, HttpUtility.UrlEncode(keyValuePair.Value));
                     }
                 }
-
+               
                 result = await Api.Put(uri, content);
             }
             catch (Exception ex)
             {
-                Console.WriteLine("CannedResponses.Update exception {0}", ex.ToString());
+                Console.WriteLine("Greetings.Get exception {0}", ex.ToString());
             }
             return result;
         }
 
-        public async Task<string> Remove(string responseID)
+        public async Task<string> Remove(string greetingID)
         {
             string result = "";
             try
             {
-                string uri = string.Format("canned_responses/{0}", HttpUtility.UrlEncode(responseID));
+                string uri = string.Format("greetings/{0}", HttpUtility.UrlEncode(greetingID));
 
                 result = await Api.Delete(uri);
             }
             catch (Exception ex)
             {
-                Console.WriteLine("CannedResponses.Remove exception {0}", ex.ToString());
+                Console.WriteLine("Goals.Remove exception {0}", ex.ToString());
             }
             return result;
         }
