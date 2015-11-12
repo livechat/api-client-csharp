@@ -18,115 +18,88 @@ namespace LiveChatApi
 
         public async Task<string> List(string group = "")
         {
-            string result = "";
-            try
+            string uri = "greetings";
+            if (group.Length > 0)
             {
-                string uri = "greetings";
-                if (group.Length > 0)
-                {
-                    uri += string.Format("?group={0}", HttpUtility.UrlEncode(group));
-                }
+                uri += string.Format("?group={0}", HttpUtility.UrlEncode(group));
+            }
 
-                result = await Api.Get(uri);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Greetings.List exception {0}", ex.ToString());
-            }
-            return result;
+            return await Api.Get(uri);
         }
 
         public async Task<string> Get(string greetingID)
         {
-            string result = "";
-            try
-            {
-                string uri = string.Format("greetings/{0}", HttpUtility.UrlEncode(greetingID));
+            string uri = string.Format("greetings/{0}", HttpUtility.UrlEncode(greetingID));
 
-                result = await Api.Get(uri);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Greetings.Get exception {0}", ex.ToString());
-            }
-            return result;
+            return await Api.Get(uri);
         }
 
-        public async Task<string> Add(string name, Dictionary<string, string>[] rules, string group = "")
+        public async Task<string> Add(string name, Dictionary<string, string>[] rules, Dictionary<string, string>[] funnelRules, string group = "")
         {
-            string result = "";
-            try
+            string uri = "greetings";
+            string content = string.Format("name={0}", HttpUtility.UrlEncode(name));
+            int i = 0; 
+            if (rules != null && rules.Count() > 0)
             {
-                string uri = "greetings";
-                string content = string.Format("name={0}", HttpUtility.UrlEncode(name));
-                if (rules != null && rules.Count() > 0)
+                foreach (var rule in rules)
                 {
-                    int i = 0; 
-                    foreach (var rule in rules)
+                    foreach (var keyValuePair in rule)
                     {
+                        content += string.Format("&rules[{0}][{1}]={2}", i, keyValuePair.Key, HttpUtility.UrlEncode(keyValuePair.Value));
+                    }
+                    i++;
+                }
+            }
+            if (funnelRules != null && funnelRules.Count() > 0)
+            {
+                foreach (var rule in funnelRules)
+                {
+                    if (rule.Count > 0)
+                    {
+                        int j = 0;
+                        content += string.Format("&rules[{0}][type]=url_funnel", i);
                         foreach (var keyValuePair in rule)
                         {
-                            content += string.Format("&rules[{0}][{1}]={2}", i, keyValuePair.Key, HttpUtility.UrlEncode(keyValuePair.Value));
+                            content += string.Format("&rules[{0}][urls][{1}][url]={2}", i, j, HttpUtility.UrlEncode(keyValuePair.Key));
+                            content += string.Format("&rules[{0}][urls][{1}][operator]={2}", i, j, HttpUtility.UrlEncode(keyValuePair.Value));
+                            j++;
                         }
                         i++;
                     }
                 }
-                if (group.Length > 0)
-                {
-                    content += string.Format("&group={0}", HttpUtility.UrlEncode(group));
-                }
-
-                result = await Api.Post(uri, content);
             }
-            catch (Exception ex)
+            if (group.Length > 0)
             {
-                Console.WriteLine("Greetings.Get exception {0}", ex.ToString());
+                content += string.Format("&group={0}", HttpUtility.UrlEncode(group));
             }
-            return result;
+
+            return await Api.Post(uri, content);
         }
 
         public async Task<string> Update(string greetingID, Dictionary<string, string> parameters)
         {
-            string result = "";
-            try
+            string uri = string.Format("greetings/{0}", HttpUtility.UrlEncode(greetingID));
+            string content = "";
+            if (parameters != null && parameters.Count > 0)
             {
-                string uri = string.Format("greetings/{0}", HttpUtility.UrlEncode(greetingID));
-                string content = "";
-                if (parameters != null && parameters.Count > 0)
+                foreach (var keyValuePair in parameters)
                 {
-                    foreach (var keyValuePair in parameters)
+                    if (content.Length > 0)
                     {
-                        if (content.Length > 0)
-                        {
-                            content += "&";
-                        }
-                        content += string.Format("{0}={1}", keyValuePair.Key, HttpUtility.UrlEncode(keyValuePair.Value));
+                        content += "&";
                     }
+                    content += string.Format("{0}={1}", keyValuePair.Key, HttpUtility.UrlEncode(keyValuePair.Value));
                 }
-               
-                result = await Api.Put(uri, content);
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Greetings.Get exception {0}", ex.ToString());
-            }
-            return result;
+
+            return await Api.Put(uri, content);
         }
 
         public async Task<string> Remove(string greetingID)
         {
-            string result = "";
-            try
-            {
-                string uri = string.Format("greetings/{0}", HttpUtility.UrlEncode(greetingID));
+            string uri = string.Format("greetings/{0}", HttpUtility.UrlEncode(greetingID));
 
-                result = await Api.Delete(uri);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Goals.Remove exception {0}", ex.ToString());
-            }
-            return result;
+            return await Api.Delete(uri);
         }
     }
 }

@@ -51,9 +51,14 @@
     <Compile Include="Constants.cs" />
     <Compile Include="Goals.cs" />
     <Compile Include="Greetings.cs" />
+    <Compile Include="Groups.cs" />
     <Compile Include="IApiHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports.cs" />
+    <Compile Include="Status.cs" />
+    <Compile Include="Tags.cs" />
+    <Compile Include="Tickets.cs" />
     <Compile Include="Visitors.cs" />
   </ItemGroup>
   <ItemGroup>

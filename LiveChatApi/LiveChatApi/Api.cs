@@ -166,5 +166,70 @@ namespace LiveChatApi
                 return greetings;
             }
         }
+
+        private Groups groups = null;
+        public Groups Groups
+        {
+            get
+            {
+                if (groups == null)
+                {
+                    groups = new Groups(this);
+                }
+                return groups;
+            }
+        }
+
+        private Reports reports = null;
+        public Reports Reports
+        {
+            get
+            {
+                if (reports == null)
+                {
+                    reports = new Reports(this);
+                }
+                return reports;
+            }
+        }
+
+        private Status status = null;
+        public Status Status
+        {
+            get
+            {
+                if (status == null)
+                {
+                    status = new Status(this);
+                }
+                return status;
+            }
+        }
+
+        private Tags tags = null;
+        public Tags Tags
+        {
+            get
+            {
+                if (tags == null)
+                {
+                    tags = new Tags(this);
+                }
+                return tags;
+            }
+        }
+
+        private Tickets tickets = null;
+        public Tickets Tickets
+        {
+            get
+            {
+                if (tickets == null)
+                {
+                    tickets = new Tickets(this);
+                }
+                return tickets;
+            }
+        }
     }
 }
