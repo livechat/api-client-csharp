@@ -16,7 +16,7 @@ namespace LiveChatApi
             Api = api;
         }
 
-        public async Task<string> List(string group = "")
+        public async Task<string> Get(string group = "")
         {
             string uri = "status";
             if (group.Length > 0)

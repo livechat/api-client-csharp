@@ -48,7 +48,7 @@ namespace LiveChatApi
         public async Task<string> SendTranscript(string chatID, string email)
         {
             string uri = string.Format("chats/{0}/send_transcript", HttpUtility.UrlEncode(chatID));
-            string content = string.Format("to={0}, HttpUtility.UrlEncode(email)");
+            string content = string.Format("to={0}", HttpUtility.UrlEncode(email));
 
             return await Api.Post(uri, content);
         }
@@ -65,7 +65,7 @@ namespace LiveChatApi
                     {
                         content += "&";
                     }
-                    content += string.Format("tag[]={1}", HttpUtility.UrlEncode(tag));
+                    content += string.Format("tag[]={0}", HttpUtility.UrlEncode(tag));
                 }
             }
 

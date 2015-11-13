@@ -76,7 +76,7 @@ namespace LiveChatApi
         {
             string uri = string.Format("agents/{0}/reset_api_key", HttpUtility.UrlEncode(login));
 
-            return await Api.Put(uri, "");
+            return await Api.Post(uri, "");
         }
 
         public async Task<string> Remove(string login)

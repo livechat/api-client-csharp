@@ -11,7 +11,7 @@ namespace LiveChatApiExample
         static void Main(string[] args)
         {
             ApiExample example = new ApiExample();
-            example.Start().Wait();
+            example.Start();
         }
     }
 }
