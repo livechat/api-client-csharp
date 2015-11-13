@@ -7,7 +7,7 @@ using System.Web;
 
 namespace LiveChatApi
 {
-    class CannedResponses
+    public class CannedResponses
     {
         private IApiHandler Api;
 

@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveChatApi", "LiveChatApi\LiveChatApi.csproj", "{04E0D8B1-4E90-485B-85BD-C666E0C293E9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveChatApiExample", "LiveChatApiExample\LiveChatApiExample.csproj", "{D406A655-1086-4180-BFE9-A1452141C8E8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{04E0D8B1-4E90-485B-85BD-C666E0C293E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04E0D8B1-4E90-485B-85BD-C666E0C293E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{04E0D8B1-4E90-485B-85BD-C666E0C293E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D406A655-1086-4180-BFE9-A1452141C8E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D406A655-1086-4180-BFE9-A1452141C8E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D406A655-1086-4180-BFE9-A1452141C8E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D406A655-1086-4180-BFE9-A1452141C8E8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

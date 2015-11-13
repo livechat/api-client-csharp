@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LiveChatApi
+namespace LiveChatApiExample
 {
-    class ApiExample
+    public class ApiExample
     {
         public async Task Start()
         {
-            Api api = new Api("k.gorski+2014102701@livechatinc.com", "bf34a8c7cb49d63eea03ddb6b964319e");
+            LiveChatApi.Api api = new LiveChatApi.Api("k.gorski+2014102701@livechatinc.com", "bf34a8c7cb49d63eea03ddb6b964319e");
 
             try
             {

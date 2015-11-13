@@ -7,7 +7,7 @@ using System.Web;
 
 namespace LiveChatApi
 {
-    class Goals
+    public class Goals
     {
         private IApiHandler Api;
 

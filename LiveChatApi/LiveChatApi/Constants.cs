@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LiveChatApi
 {
-    class Constants
+    public class Constants
     {
         public const string ApiBaseAddress = "https://api.livechatinc.com";
     }

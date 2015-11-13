@@ -8,7 +8,7 @@ using System.Net.Http.Headers;
 
 namespace LiveChatApi
 {
-    class Api : IApiHandler
+    public class Api : IApiHandler
     {
         private HttpClient Client;
         
@@ -229,6 +229,19 @@ namespace LiveChatApi
                     tickets = new Tickets(this);
                 }
                 return tickets;
+            }
+        }
+
+        private Webhooks webhooks = null;
+        public Webhooks Webhooks
+        {
+            get
+            {
+                if (webhooks == null)
+                {
+                    webhooks = new Webhooks(this);
+                }
+                return webhooks;
             }
         }
     }
