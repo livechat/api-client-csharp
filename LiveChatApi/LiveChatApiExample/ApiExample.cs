@@ -217,8 +217,42 @@ namespace LiveChatApiExample
 
         public async Task GoalsTest()
         {
-            string goals = await Api.Goals.List();
-            Console.WriteLine("Goals: {0}", goals);
+            Console.WriteLine("Get goals");
+            string result = await Api.Goals.List();
+            Console.WriteLine(result);
+
+            Console.ReadLine();
+
+            Console.WriteLine("Get goal");
+            result = await Api.Goals.Get("7601");
+            Console.WriteLine(result);
+
+            Console.ReadLine();
+
+            Console.WriteLine("Mark goal as successful");
+            result = await Api.Goals.MarkAsSuccessful("7601", "visitor1");
+            Console.WriteLine(result);
+
+            Console.ReadLine();
+
+            Console.WriteLine("Add goal");
+            result = await Api.Goals.Add("new_goal", "api");
+            Console.WriteLine(result);
+
+            Console.ReadLine();
+
+            Console.WriteLine("Update goal"); 
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            parameters.Add("name", "purchase_paused");
+            parameters.Add("active", "0");
+            result = await Api.Goals.Update("7601", parameters);
+            Console.WriteLine(result);
+
+            Console.ReadLine();
+
+            Console.WriteLine("Remove goal");
+            result = await Api.Goals.Remove("7601");
+            Console.WriteLine(result);
 
             Console.WriteLine("");
         }

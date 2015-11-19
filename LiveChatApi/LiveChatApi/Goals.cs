@@ -53,15 +53,19 @@ namespace LiveChatApi
             return await Api.Post(uri, content);
         }
 
-        public async Task<string> Update(string goalID, string name, string type, Dictionary<string, string> parameters = null)
+        public async Task<string> Update(string goalID, Dictionary<string, string> parameters = null)
         {
             string uri = string.Format("goals/{0}", HttpUtility.UrlEncode(goalID));
-            string content = string.Format("name={0}&type={1}", HttpUtility.UrlEncode(name), HttpUtility.UrlEncode(type));
+            string content = "";
             if (parameters != null && parameters.Count > 0)
             {
                 foreach (var keyValuePair in parameters)
                 {
-                    content += string.Format("&{0}={1}", keyValuePair.Key, HttpUtility.UrlEncode(keyValuePair.Value));
+                    if (content.Length > 0)
+                    {
+                        content += "&";
+                    }
+                    content += string.Format("{0}={1}", keyValuePair.Key, HttpUtility.UrlEncode(keyValuePair.Value));
                 }
             }
 
