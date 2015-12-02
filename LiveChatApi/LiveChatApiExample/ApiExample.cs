@@ -259,65 +259,136 @@ namespace LiveChatApiExample
 
         public async Task GreetingsTest()
         {
-            string greetings = await Api.Greetings.List();
-            Console.WriteLine("Greetings: {0}", greetings);
+            Console.WriteLine("Get greetings");
+            string result = await Api.Greetings.List();
+            Console.WriteLine(result);
+
+            Console.ReadLine();
+            
+            Console.WriteLine("Get greeting");
+            result = await Api.Greetings.Get("7661");
+            Console.WriteLine(result);
+
+            Console.ReadLine();
+
+            Console.WriteLine("Add greeting");
+            Dictionary<string, string>[] rules = { new Dictionary<string, string>(), new Dictionary<string, string>() };
+            rules[0].Add("type", "visit_time_page");
+            rules[0].Add("value", "15");
+            rules[0].Add("operator", "greater_than");
+            rules[1].Add("type", "custom_variable");
+            rules[1].Add("variable_name", "my_custom_var");
+            rules[1].Add("variable_value", "var_value");
+            rules[1].Add("operator", "contains");
+            Dictionary<string, string>[] funnelRules = { new Dictionary<string, string>() };
+            funnelRules[0].Add("mystore.com/shoes", "equals");
+            funnelRules[0].Add("cart", "contains");
+            result = await Api.Greetings.Add("my_invitation", rules, funnelRules);
+            Console.WriteLine(result);
+
+            Console.ReadLine();
+
+            Console.WriteLine("Update greeting");
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            parameters.Add("active","1");
+            result = await Api.Greetings.Update("7661", parameters);
+            Console.WriteLine(result);
+
+            Console.ReadLine();
+
+            Console.WriteLine("Remove greeting");
+            result = await Api.Greetings.Remove("7661");
+            Console.WriteLine(result);
 
             Console.WriteLine("");
         }
 
         public async Task GroupsTest()
         {
-            string groups = await Api.Groups.List();
-            Console.WriteLine("Groups: {0}", groups);
+            Console.WriteLine("Get groups"); 
+            string result = await Api.Groups.List();
+            Console.WriteLine(result);
+
+            Console.ReadLine();
+
+            Console.WriteLine("Get group");
+            result = await Api.Groups.Get("0");
+            Console.WriteLine(result);
+
+            Console.ReadLine();
+
+            Console.WriteLine("Add group");
+            string[] agents = { "k.gorski+2014102701@livechatinc.com" };
+            result = await Api.Groups.Add("new_group", agents);
+            Console.WriteLine(result);
+
+            Console.ReadLine();
+
+            Console.WriteLine("Update group");
+            string[] agents2 = { "k.gorski+2014102701@livechatinc.com" };
+            result = await Api.Groups.Update("1", agents2);
+            Console.WriteLine(result);
+
+            Console.ReadLine();
+
+            Console.WriteLine("Remove group");
+            result = await Api.Groups.Remove("2");
+            Console.WriteLine(result);
 
             Console.WriteLine("");
         }
 
         public async Task ReportsTest()
         {
+            Console.WriteLine("Get total chats"); 
             Dictionary<string, string> parameters = new Dictionary<string, string>();
-            string report = await Api.Reports.TotalChats(parameters);
-            Console.WriteLine("Report: {0}", report);
+            string result = await Api.Reports.TotalChats(parameters);
+            Console.WriteLine(result);
 
             Console.WriteLine("");
         }
 
         public async Task StatusTest()
         {
-            string status = await Api.Status.Get();
-            Console.WriteLine("Status: {0}", status);
+            Console.WriteLine("Get status"); 
+            string result = await Api.Status.Get();
+            Console.WriteLine(result);
 
             Console.WriteLine("");
         }
 
         public async Task TagsTest()
         {
-            string tags = await Api.Tags.List();
-            Console.WriteLine("Tags: {0}", tags);
+            Console.WriteLine("Get tags"); 
+            string result = await Api.Tags.List();
+            Console.WriteLine(result);
 
             Console.WriteLine("");
         }
 
         public async Task TicketsTest()
         {
-            string tickets = await Api.Tickets.List();
-            Console.WriteLine("Tickets: {0}", tickets);
+            Console.WriteLine("Get tickets"); 
+            string result = await Api.Tickets.List();
+            Console.WriteLine(result);
 
             Console.WriteLine("");
         }
 
         public async Task VisitorsTest()
         {
-            string visitors = await Api.Visitors.List();
-            Console.WriteLine("Visitors: {0}", visitors);
+            Console.WriteLine("Get visitors"); 
+            string result = await Api.Visitors.List();
+            Console.WriteLine(result);
 
             Console.WriteLine("");
         }
 
         public async Task WebhooksTest()
         {
-            string webhooks = await Api.Webhooks.List();
-            Console.WriteLine("Webhooks: {0}", webhooks);
+            Console.WriteLine("Get webhooks"); 
+            string result = await Api.Webhooks.List();
+            Console.WriteLine(result);
 
             Console.WriteLine("");
         }

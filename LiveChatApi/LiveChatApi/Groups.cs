@@ -39,7 +39,7 @@ namespace LiveChatApi
                 int i = 0;
                 foreach (var agent in agents)
                 {
-                    content += string.Format("&agent[{0}]={1}", i, HttpUtility.UrlEncode(agent));
+                    content += string.Format("&agents[{0}]={1}", i, HttpUtility.UrlEncode(agent));
                 }
             }
             if (language.Length > 0)
@@ -83,7 +83,7 @@ namespace LiveChatApi
                 content += string.Format("language={0}", HttpUtility.UrlEncode(language));
             }
 
-            return await Api.Post(uri, content);
+            return await Api.Put(uri, content);
         }
 
         public async Task<string> Remove(string groupID)
