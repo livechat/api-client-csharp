@@ -61,10 +61,15 @@ Available methods
 ~~~
 string result = await Api.Agents.List();
 ~~~
+~~~
+string status = "accepting chats";
+string result = await Api.Agents.List(status);
+~~~
 
 **Get a single agent details**
 ~~~
-string result = await Api.Agents.Get("robert@mycompany.com");
+string login = "robert@mycompany.com";
+string result = await Api.Agents.Get(login);
 ~~~
 
 **Create an agent**
@@ -77,32 +82,108 @@ string result = await Api.Agents.Add(props);
 
 **Update an agent**
 ~~~
+string login = "john@mycompany.com";
 Dictionary<string, string> props = new Dictionary<string, string>();
 props.Add("login_status", "not accepting chats");
 props.Add("max_chats_count", "2");
-string result = await Api.Agents.Update("john@mycompany.com", props);
+string result = await Api.Agents.Update(login, props);
 ~~~
 
 **Reset an API key**
 ~~~
-string result = await Api.Agents.ResetApiKey("username@mycompany.com");
+string login = "username@mycompany.com";
+string result = await Api.Agents.ResetApiKey(login);
 ~~~
 *The agent can only change his own api key.*
 
 **Remove an agent**
 ~~~
-result = await Api.Agents.Remove("john@mycompany.com");
+string login = "john@mycompany.com";
+string result = await Api.Agents.Remove(login);
 ~~~
 
 ### Archives
 
 [Archives REST API documentation](https://developers.livechatinc.com/rest-api/#!archives).
 
+**Get list of chats**
+~~~
+Dictionary<string, string> parameters = new Dictionary<string, string>();
+parameters.Add("date_from", "2015-10-01");
+parameters.Add("query", "test");
+string result = await Api.Chats.Get(parameters);
+~~~
+
+**Get single chat**
+~~~
+string chatID = "NXBE94NZ10";
+string result = await Api.Chats.Get(chatID);
+~~~
+
+**Send chat transcript to e-mail**
+~~~
+string chatID = "NXBE94NZ10";
+string email = "username@mycompany.com";
+string result = await Api.Chats.SendTranscript(chatID, email);
+~~~
+
+**Update chat tags**
+~~~
+string chatID = "NXBE94NZ10";
+string[] tags = { "sales", "complaint" };
+string result = await Api.Chats.Tags(chatID, tags);
+~~~
 
 ### Canned responses
 
 [Canned responses REST API documentation](http://developers.livechatinc.com/rest-api/#!canned-responses).
 
+**List all canned responses**
+~~~
+string result = await Api.CannedResponses.List();
+~~~
+~~~
+string group = "0";
+string result = await Api.CannedResponses.List(group);
+~~~
+
+**Get single canned response**
+~~~
+string responseID = "3151";
+string result = await Api.CannedResponses.Get(responseID);
+~~~
+
+**Create a new canned response**
+~~~
+string text = "text";
+string[] tags = {"tag1", "tag2"};
+string result = await Api.CannedResponses.Add(text, tags);
+~~~
+~~~
+string text = "text";
+string[] tags = {"tag1", "tag2"};
+string group = "0";
+string result = await Api.CannedResponses.Add(text, tags, group);
+~~~
+
+**Update a canned response**
+~~~
+string responseID = "3151";
+string[] tags = { "tag3", "tag4" };
+string result = await Api.CannedResponses.Update(responseID, tags);
+~~~
+~~~
+string responseID = "3151";
+string[] tags = { "tag3", "tag4" };
+string text = "text";
+string result = await Api.CannedResponses.Update(responseID, tags, text);
+~~~
+
+**Remove a canned response**
+~~~
+string responseID = "3151";
+string result = await Api.CannedResponses.Remove(responseID);
+~~~
 
 ### Chat
 
@@ -112,6 +193,54 @@ result = await Api.Agents.Remove("john@mycompany.com");
 ### Goals
 
 [Goals REST API documentation](http://developers.livechatinc.com/rest-api/#!goals).
+
+**List all goals**
+~~~
+string result = await Api.Goals.List();
+~~~
+
+**Get a single goal details**
+~~~
+string goalID = "7601";
+string result = await Api.Goals.Get(goalID);
+~~~
+
+**Mark goal as successful**
+~~~
+string goalID = "7601";
+string visitorID = "visitor1";
+string result = await Api.Goals.MarkAsSuccessful(goalID, visitorID);
+~~~
+
+**Add a new goal**
+~~~
+string name = "new_goal";
+string type = "api";
+string result = await Api.Goals.Add(name, type);
+~~~
+~~~
+string name = "new_goal";
+string type = "url";
+Dictionary<string, string> parameters = new Dictionary<string, string>();
+parameters.Add("url", "http://www.mystore.com/checkout/thank_you");
+parameters.Add("match_type","exact");
+string result = await Api.Goals.Add(name, type, parameters);
+~~~
+
+**Update a goal**
+~~~
+string goalID = "7601";
+Dictionary<string, string> parameters = new Dictionary<string, string>();
+parameters.Add("name", "new_goal_paused");
+parameters.Add("active", "0");
+string result = await Api.Goals.Update(goalID, parameters);
+~~~
+
+**Remove a goal**
+~~~
+string goalID = "7601";
+string result = await Api.Goals.Remove(goalID);
+~~~
 
 ### Greetings
 
