@@ -16,12 +16,12 @@ namespace LiveChatApi
             Api = api;
         }
 
-        public async Task<string> Get(string group = "")
+        public async Task<string> Get(string groupID = "")
         {
             string uri = "status";
-            if (group.Length > 0)
+            if (groupID.Length > 0)
             {
-                uri += string.Format("/{0}", HttpUtility.UrlEncode(group));
+                uri += string.Format("/{0}", HttpUtility.UrlEncode(groupID));
             }
 
             return await Api.Get(uri);

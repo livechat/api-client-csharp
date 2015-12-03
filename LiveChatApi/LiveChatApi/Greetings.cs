@@ -16,12 +16,12 @@ namespace LiveChatApi
             Api = api;
         }
 
-        public async Task<string> List(string group = "")
+        public async Task<string> List(string groupID = "")
         {
             string uri = "greetings";
-            if (group.Length > 0)
+            if (groupID.Length > 0)
             {
-                uri += string.Format("?group={0}", HttpUtility.UrlEncode(group));
+                uri += string.Format("?group={0}", HttpUtility.UrlEncode(groupID));
             }
 
             return await Api.Get(uri);
@@ -34,7 +34,7 @@ namespace LiveChatApi
             return await Api.Get(uri);
         }
 
-        public async Task<string> Add(string name, Dictionary<string, string>[] rules, Dictionary<string, string>[] funnelRules, string group = "")
+        public async Task<string> Add(string name, Dictionary<string, string>[] rules, Dictionary<string, string>[] funnelRules, string groupID = "")
         {
             string uri = "greetings";
             string content = string.Format("name={0}", HttpUtility.UrlEncode(name));
@@ -68,9 +68,9 @@ namespace LiveChatApi
                     }
                 }
             }
-            if (group.Length > 0)
+            if (groupID.Length > 0)
             {
-                content += string.Format("&group={0}", HttpUtility.UrlEncode(group));
+                content += string.Format("&group={0}", HttpUtility.UrlEncode(groupID));
             }
 
             return await Api.Post(uri, content);

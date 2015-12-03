@@ -53,7 +53,7 @@ namespace LiveChatApi
             return await Api.Post(uri, content);
         }
 
-        public async Task<string> Update(string goalID, Dictionary<string, string> parameters = null)
+        public async Task<string> Update(string goalID, Dictionary<string, string> parameters)
         {
             string uri = string.Format("goals/{0}", HttpUtility.UrlEncode(goalID));
             string content = "";

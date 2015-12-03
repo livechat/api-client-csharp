@@ -120,7 +120,6 @@ namespace LiveChatApiExample
             Dictionary<string, string> props = new Dictionary<string, string>();
             props.Add("login", "k.gorski+2015103102@livechatinc.com");
             props.Add("name", "John");
-
             result = await Api.Agents.Add(props);
             Console.WriteLine(result);
 
@@ -130,7 +129,6 @@ namespace LiveChatApiExample
             props.Clear();
             props.Add("login_status", "not accepting chats");
             props.Add("max_chats_count", "2");
-
             result = await Api.Agents.Update("k.gorski+2015103102@livechatinc.com", props);
             Console.WriteLine(result);
 
@@ -178,7 +176,7 @@ namespace LiveChatApiExample
             Console.ReadLine();
 
             Console.WriteLine("Delete canned response");
-            result = await Api.CannedResponses.Update("30131", tags2);
+            result = await Api.CannedResponses.Remove("30131");
             Console.WriteLine(result);
             
             Console.WriteLine("");
@@ -340,9 +338,22 @@ namespace LiveChatApiExample
 
         public async Task ReportsTest()
         {
-            Console.WriteLine("Get total chats"); 
+            Console.WriteLine("Total chats"); 
             Dictionary<string, string> parameters = new Dictionary<string, string>();
+            parameters.Add("date_from", "2015-10-01");
+            parameters.Add("date_to", "2015-10-31");
+            parameters.Add("group_by", "day");
             string result = await Api.Reports.TotalChats(parameters);
+            Console.WriteLine(result);
+
+            Console.ReadLine();
+
+            Console.WriteLine("Chat sorces");
+            parameters.Clear();
+            parameters.Add("date_from", "2015-10-01");
+            parameters.Add("date_to", "2015-10-31");
+            parameters.Add("group_by", "day");
+            result = await Api.Reports.ChatSources(parameters);
             Console.WriteLine(result);
 
             Console.WriteLine("");

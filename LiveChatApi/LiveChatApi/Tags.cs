@@ -16,21 +16,21 @@ namespace LiveChatApi
             Api = api;
         }
 
-        public async Task<string> List(string group = "")
+        public async Task<string> List(string groupID = "")
         {
             string uri = "tags";
-            if (group.Length > 0)
+            if (groupID.Length > 0)
             {
-                uri += string.Format("?group={0}", HttpUtility.UrlEncode(group));
+                uri += string.Format("?group={0}", HttpUtility.UrlEncode(groupID));
             }
 
             return await Api.Get(uri);
         }
 
-        public async Task<string> Add(string author, string tag, string group)
+        public async Task<string> Add(string author, string tag, string groupID)
         {
             string uri = "tags";
-            string content = string.Format("tag={0}&author={1}&group={2}", HttpUtility.UrlEncode(tag), HttpUtility.UrlEncode(author), HttpUtility.UrlEncode(group));
+            string content = string.Format("tag={0}&author={1}&group={2}", HttpUtility.UrlEncode(tag), HttpUtility.UrlEncode(author), HttpUtility.UrlEncode(groupID));
 
             return await Api.Post(uri, content);
         }
