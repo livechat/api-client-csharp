@@ -143,8 +143,8 @@ string result = await Api.Chats.Tags(chatID, tags);
 string result = await Api.CannedResponses.List();
 ~~~
 ~~~
-string group = "0";
-string result = await Api.CannedResponses.List(group);
+string groupID = "0";
+string result = await Api.CannedResponses.List(groupID);
 ~~~
 
 **Get single canned response**
@@ -162,8 +162,8 @@ string result = await Api.CannedResponses.Add(text, tags);
 ~~~
 string text = "text";
 string[] tags = {"tag1", "tag2"};
-string group = "0";
-string result = await Api.CannedResponses.Add(text, tags, group);
+string groupID = "0";
+string result = await Api.CannedResponses.Add(text, tags, groupID);
 ~~~
 
 **Update a canned response**
@@ -246,9 +246,121 @@ string result = await Api.Goals.Remove(goalID);
 
 [Greetings REST API documentation](https://developers.livechatinc.com/rest-api/#!greetings).
 
+**List all greetings**
+~~~
+string result = await Api.Greetings.List();
+~~~
+~~~
+string groupID = "0";
+string result = await Api.Greetings.List(groupID);
+~~~
+
+**Get a single greeting**
+~~~
+string greetingID = "7661";
+string result = await Api.Greetings.Get(greetingID);
+~~~
+
+**Create a new greeting**
+~~~
+string name = "my_invitation";
+Dictionary<string, string>[] rules = { new Dictionary<string, string>(), new Dictionary<string, string>() };
+rules[0].Add("type", "visit_time_page");
+rules[0].Add("value", "15");
+rules[0].Add("operator", "greater_than");
+rules[1].Add("type", "custom_variable");
+rules[1].Add("variable_name", "my_custom_var");
+rules[1].Add("variable_value", "var_value");
+rules[1].Add("operator", "contains");
+Dictionary<string, string>[] funnelRules = { new Dictionary<string, string>() };
+funnelRules[0].Add("mystore.com/shoes", "equals");
+funnelRules[0].Add("cart", "contains");
+string result = await Api.Greetings.Add(name, rules, funnelRules);
+~~~
+~~~
+string name = "my_invitation";
+Dictionary<string, string>[] rules = { new Dictionary<string, string>(), new Dictionary<string, string>() };
+rules[0].Add("type", "visit_time_page");
+rules[0].Add("value", "15");
+rules[0].Add("operator", "greater_than");
+rules[1].Add("type", "custom_variable");
+rules[1].Add("variable_name", "my_custom_var");
+rules[1].Add("variable_value", "var_value");
+rules[1].Add("operator", "contains");
+Dictionary<string, string>[] funnelRules = { new Dictionary<string, string>() };
+funnelRules[0].Add("mystore.com/shoes", "equals");
+funnelRules[0].Add("cart", "contains");
+string groupID = "0";
+string result = await Api.Greetings.Add(name, rules, funnelRules, groupID);
+~~~
+
+**Update a greeting**
+~~~
+string greetingID = "7661";
+Dictionary<string, string> parameters = new Dictionary<string, string>();
+parameters.Add("active","1");
+string result = await Api.Greetings.Update(greetingID, parameters);
+~~~
+
+**Remove a greeting**
+~~~
+string greetingID = "7661";
+string result = await Api.Greetings.Remove(greetingID);
+~~~
+
 ### Groups
 
 [Groups REST API documentation](http://developers.livechatinc.com/rest-api/#!groups).
+
+**List all groups**
+~~~
+string result = await Api.Groups.List();
+~~~
+
+**Get a single group details**
+~~~
+string groupID = "0";
+string result = await Api.Groups.Get(groupID);
+~~~
+
+**Create a new group**
+~~~
+string name = "new_group";
+string[] agents = { "robert@mycompany.com", "john@mycompany.com" };
+string result = await Api.Groups.Add(name, agents);
+~~~
+~~~
+string name = "new_group";
+string[] agents = { "robert@mycompany.com", "john@mycompany.com" };
+string language = "es";
+string result = await Api.Groups.Add(name, agents, language);
+~~~
+
+**Update a group**
+~~~
+string groupID = "1";
+string[] agents = { "robert@mycompany.com" };
+result = await Api.Groups.Update(groupID, agents);
+~~~
+~~~
+string groupID = "1";
+string[] agents = { "robert@mycompany.com" };
+string name = "other_name";
+result = await Api.Groups.Update(groupID, agents, name);
+~~~
+~~~
+string groupID = "1";
+string[] agents = { "robert@mycompany.com" };
+string name = "other_name";
+string language = "de"
+result = await Api.Groups.Update(groupID, agents, name, language);
+~~~
+
+**Remove a group**
+~~~
+string groupID = "1";
+string result = await Api.Groups.Remove(groupID);
+~~~
 
 
 ### Reports
