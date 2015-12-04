@@ -35,11 +35,12 @@ namespace LiveChatApi
             return await Api.Post(uri, content);
         }
 
-        public async Task<string> Remove(string tagID)
+        public async Task<string> Remove(string tag, string groupID)
         {
-            string uri = string.Format("tags/{0}", HttpUtility.UrlEncode(tagID));
+            string uri = string.Format("tags/{0}", HttpUtility.UrlEncode(tag));
+            string content = string.Format("group={0}", HttpUtility.UrlEncode(groupID));
 
-            return await Api.Delete(uri);
+            return await Api.Delete(uri, content);
         }
 
     }

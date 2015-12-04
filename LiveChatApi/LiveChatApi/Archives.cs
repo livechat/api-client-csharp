@@ -7,11 +7,11 @@ using System.Web;
 
 namespace LiveChatApi
 {
-    public class Chats
+    public class Archives
     {
         private IApiHandler Api;
 
-        public Chats(IApiHandler api)
+        public Archives(IApiHandler api)
         {
             Api = api;
         }

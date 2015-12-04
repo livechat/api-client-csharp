@@ -11,6 +11,6 @@ namespace LiveChatApi
         Task<string> Get(string uri);
         Task<string> Post(string uri, string content);
         Task<string> Put(string uri, string content);
-        Task<string> Delete(string uri);
+        Task<string> Delete(string uri, string content = "");
     }
 }

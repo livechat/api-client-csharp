@@ -73,9 +73,24 @@ namespace LiveChatApi
             return "";
         }
 
-        public async Task<string> Delete(string uri)
+        public async Task<string> Delete(string uri, string content = "")
         {
-            HttpResponseMessage response = await Client.DeleteAsync(uri);
+            HttpResponseMessage response = null;
+            if (content.Length > 0) 
+            {
+                HttpRequestMessage request = new HttpRequestMessage
+                {
+                    Content = new StringContent(content, Encoding.UTF8, "application/x-www-form-urlencoded"),
+                    Method = HttpMethod.Delete,
+                    RequestUri = new Uri(Client.BaseAddress + uri)
+                };
+                response = await Client.SendAsync(request);
+            }
+            else
+            {
+                response = await Client.DeleteAsync(uri);
+            }
+
             if (response.IsSuccessStatusCode)
             {
                 return await response.Content.ReadAsStringAsync();
@@ -102,31 +117,18 @@ namespace LiveChatApi
             }
         }
 
-        private Chats chats = null;
-        public Chats Chats
+        private Archives archives = null;
+        public Archives Archives
         {
             get
             {
-                if (chats == null)
+                if (archives == null)
                 {
-                    chats = new Chats(this);
+                    archives = new Archives(this);
                 }
-                return chats;
+                return archives;
             }
         }
-
-        private Visitors visitors = null;
-        public Visitors Visitors
-        {
-            get
-            {
-                if (visitors == null)
-                {
-                    visitors = new Visitors(this);
-                }
-                return visitors;
-            }
-        } 
 
         private CannedResponses cannedResponses = null;
         public CannedResponses CannedResponses
@@ -138,6 +140,19 @@ namespace LiveChatApi
                     cannedResponses = new CannedResponses(this);
                 }
                 return cannedResponses;
+            }
+        }
+
+        private Chat chat = null;
+        public Chat Chat
+        {
+            get
+            {
+                if (chat == null)
+                {
+                    chat = new Chat(this);
+                }
+                return chat;
             }
         }
 
@@ -231,6 +246,19 @@ namespace LiveChatApi
                 return tickets;
             }
         }
+
+        private Visitors visitors = null;
+        public Visitors Visitors
+        {
+            get
+            {
+                if (visitors == null)
+                {
+                    visitors = new Visitors(this);
+                }
+                return visitors;
+            }
+        } 
 
         private Webhooks webhooks = null;
         public Webhooks Webhooks

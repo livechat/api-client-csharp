@@ -63,7 +63,7 @@ namespace LiveChatApi
 
         public async Task<string> ChatRanking(Dictionary<string, string> parameters)
         {
-            string uri = "chats/ratings/ranking";
+            string uri = "reports/chats/ratings/ranking";
             return await Get(uri, parameters);
         }
 
@@ -115,7 +115,7 @@ namespace LiveChatApi
             return await Get(uri, parameters);
         }
 
-        public async Task<string> TicketsFirstResponseTIme(Dictionary<string, string> parameters)
+        public async Task<string> TicketsFirstResponseTime(Dictionary<string, string> parameters)
         {
             string uri = "reports/tickets/first_response_time";
             return await Get(uri, parameters);
@@ -157,10 +157,10 @@ namespace LiveChatApi
             return await Get(uri, parameters);
         }
 
-        public async Task<string> SimultaneousChats(Dictionary<string, string> parameters)
+        public async Task<string> SimultaneousChats(string weekday)
         {
-            string uri = "reports/chats/agents_occupancy";
-            return await Get(uri, parameters);
+            string uri = string.Format("reports/chats/agents_occupancy?weekday={0}", HttpUtility.UrlEncode(weekday));
+            return await Api.Get(uri);
         }
     }
 }
