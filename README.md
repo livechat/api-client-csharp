@@ -367,10 +367,195 @@ string result = await Api.Groups.Remove(groupID);
 
 [Reports REST API documentation](http://developers.livechatinc.com/rest-api/#!reports).
 
+**Total chats**
+~~~
+Dictionary<string, string> parameters = new Dictionary<string, string>();
+parameters.Add("date_from", "2015-10-01");
+parameters.Add("date_to", "2015-10-31");
+parameters.Add("agent", "john@mycompany.com");
+parameters.Add("group_by", "hour");
+string result = await Api.Reports.TotalChats(parameters);
+~~~
+
+**Chat sources**
+~~~
+Dictionary<string, string> parameters = new Dictionary<string, string>();
+parameters.Add("date_from", "2015-10-01");
+parameters.Add("date_to", "2015-10-31");
+parameters.Add("agent", "john@mycompany.com");
+parameters.Add("group_by", "hour");
+parameters.Add("tag[]", "sales");
+string result = await Api.Reports.ChatSources(parameters);
+~~~
+
+**Chat ratings**
+~~~
+Dictionary<string, string> parameters = new Dictionary<string, string>();
+parameters.Add("group", "2");
+parameters.Add("date_from", "2015-01-01");
+parameters.Add("date_to", "2015-10-31");
+parameters.Add("group_by", "month");
+string result = await Api.Reports.ChatRatings(parameters);
+~~~
+
+**Chat ranking**
+~~~
+Dictionary<string, string> parameters = new Dictionary<string, string>();
+parameters.Add("date_from", "2015-10-01");
+parameters.Add("date_to", "2015-10-31");
+string result = await Api.Reports.ChatRanking(parameters);
+~~~
+
+**Queued visitors**
+~~~
+Dictionary<string, string> parameters = new Dictionary<string, string>();
+parameters.Add("date_from", "2015-10-01");
+parameters.Add("date_to", "2015-10-31");
+parameters.Add("group", "2");
+string result = await Api.Reports.QueuedVisitors(parameters);
+~~~
+
+**Queue waiting times**
+~~~
+Dictionary<string, string> parameters = new Dictionary<string, string>();
+parameters.Add("date_from", "2015-10-01");
+parameters.Add("date_to", "2015-10-31");
+parameters.Add("group", "2");
+string result = await Api.Reports.QueueWaitingTimes(parameters);
+~~~
+
+**Availability**
+~~~
+Dictionary<string, string> parameters = new Dictionary<string, string>();
+parameters.Add("date_from", "2015-10-01");
+parameters.Add("date_to", "2015-10-31");
+parameters.Add("agent", "john@mycompany.com");
+string result = await Api.Reports.Availability(parameters);
+~~~
+
+**Chatting time**
+~~~
+Dictionary<string, string> parameters = new Dictionary<string, string>();
+parameters.Add("date_from", "2015-10-01");
+parameters.Add("date_to", "2015-10-31");
+parameters.Add("group", "2");
+string result = await Api.Reports.ChattingTime(parameters);
+~~~
+
+**Chats first response time**
+~~~
+Dictionary<string, string> parameters = new Dictionary<string, string>();
+parameters.Add("date_from", "2015-10-01");
+parameters.Add("date_to", "2015-10-31");
+parameters.Add("agent", "john@mycompany.com");
+string result = await Api.Reports.ChatsFirstResponseTime(parameters);
+~~~
+
+**Chats response time**
+~~~
+Dictionary<string, string> parameters = new Dictionary<string, string>();
+parameters.Add("date_from", "2015-10-01");
+parameters.Add("date_to", "2015-10-31");
+parameters.Add("agent", "john@mycompany.com");
+string result = await Api.Reports.ChatsResponseTime(parameters);
+~~~
+
+**Goals**
+~~~
+Dictionary<string, string> parameters = new Dictionary<string, string>();
+parameters.Add("date_from", "2015-01-01");
+parameters.Add("date_to", "2015-10-31");
+parameters.Add("goal", "71");
+parameters.Add("group_by", "month");
+string result = await Api.Reports.Goals(parameters);
+~~~
+
+**New tickets**
+~~~
+Dictionary<string, string> parameters = new Dictionary<string, string>();
+parameters.Add("date_from", "2015-10-01");
+parameters.Add("date_to", "2015-10-01");
+parameters.Add("group_by", "hour");
+string result = await Api.Reports.NewTickets(parameters);
+~~~
+
+**Tickets first response time**
+~~~
+Dictionary<string, string> parameters = new Dictionary<string, string>();
+parameters.Add("date_from", "2015-10-01");
+parameters.Add("date_to", "2015-10-31");
+parameters.Add("agent", "john@mycompany.com");
+string result = await Api.Reports.TicketsFirstResponseTime(parameters);
+~~~
+
+**Solved tickets**
+~~~
+Dictionary<string, string> parameters = new Dictionary<string, string>();
+parameters.Add("date_from", "2015-10-01");
+parameters.Add("date_to", "2015-10-31");
+string result = await Api.Reports.SolvedTickets(parameters);
+~~~
+
+**Tickets resolution time**
+~~~
+Dictionary<string, string> parameters = new Dictionary<string, string>();
+parameters.Add("date_from", "2015-10-01");
+parameters.Add("date_to", "2015-10-31");
+string result = await Api.Reports.TicketsResolutionTime(parameters);
+~~~
+
+**Ticket sources**
+~~~
+Dictionary<string, string> parameters = new Dictionary<string, string>();
+parameters.Add("date_from", "2015-10-01");
+parameters.Add("date_to", "2015-10-31");
+string result = await Api.Reports.TicketSources(parameters);
+~~~
+
+**Ticket ratings report**
+~~~
+Dictionary<string, string> parameters = new Dictionary<string, string>();
+parameters.Add("date_from", "2015-01-01");
+parameters.Add("date_to", "2015-10-31");
+parameters.Add("group_by", "month");
+string result = await Api.Reports.TicketRatings(parameters);
+~~~
+
+**Ticket Ranking**
+~~~
+Dictionary<string, string> parameters = new Dictionary<string, string>();
+parameters.Add("date_from", "2015-10-01");
+parameters.Add("date_to", "2015-10-31");
+string result = await Api.Reports.TicketRanking(parameters);
+~~~
+
+**Greetings conversions**
+~~~
+Dictionary<string, string> parameters = new Dictionary<string, string>();
+parameters.Add("date_from", "2015-01-01");
+parameters.Add("date_to", "2015-10-31");
+parameters.Add("group_by", "month");
+string result = await Api.Reports.GreetingsConversions(parameters);
+~~~
+
+**Number of simultaneous chats**
+~~~
+string weekday = "mon";
+string result = await Api.Reports.SimultaneousChats(weekday);
+~~~
 
 ### Status
 
 [Status REST API documentation](http://developers.livechatinc.com/rest-api/#!status).
+
+**Get status**
+~~~
+string result = await Api.Status.Get();
+~~~
+~~~
+string groupID = "1";
+string result = await Api.Status.Get(groupID);
+~~~
 
 ### Tags
 
