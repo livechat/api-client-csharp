@@ -111,27 +111,27 @@ string result = await Api.Agents.Remove(login);
 Dictionary<string, string> parameters = new Dictionary<string, string>();
 parameters.Add("date_from", "2015-10-01");
 parameters.Add("query", "test");
-string result = await Api.Chats.Get(parameters);
+string result = await Api.Archives.Get(parameters);
 ~~~
 
 **Get single chat**
 ~~~
 string chatID = "NXBE94NZ10";
-string result = await Api.Chats.Get(chatID);
+string result = await Api.Archives.Get(chatID);
 ~~~
 
 **Send chat transcript to e-mail**
 ~~~
 string chatID = "NXBE94NZ10";
 string email = "username@mycompany.com";
-string result = await Api.Chats.SendTranscript(chatID, email);
+string result = await Api.Archives.SendTranscript(chatID, email);
 ~~~
 
 **Update chat tags**
 ~~~
 string chatID = "NXBE94NZ10";
 string[] tags = { "sales", "complaint" };
-string result = await Api.Chats.Tags(chatID, tags);
+string result = await Api.Archives.Tags(chatID, tags);
 ~~~
 
 ### Canned responses
