@@ -561,9 +561,71 @@ string result = await Api.Status.Get(groupID);
 
 [Tags REST API documentation](https://developers.livechatinc.com/rest-api/#!tags).
 
+**List all tags**
+~~~
+string result = await Api.Tags.List();
+~~~
+~~~
+string groupID = "1";
+string result = await Api.Tags.Get(groupID);
+~~~
+
+**Add a tag**
+~~~
+string author = "john@mycompany.com";
+string tag = "support";
+string groupID = "1";
+string result = await Api.Tags.Add(author, tag, groupID);
+~~~
+
+**Delete a tag**
+~~~
+string tag = "support";
+string groupID = "1";
+string result = await Api.Tags.Remove(tag, groupID);
+~~~
+
 ### Tickets
 
 [Tickets REST API documentation](http://developers.livechatinc.com/rest-api/#!tickets).
+
+**Get list of tickets**
+~~~
+string result = await Api.Tickets.List();
+~~~
+~~~
+Dictionary<string, string> parameters = new Dictionary<string, string>();
+parameters.Add("date_from", "2015-10-01");
+parameters.Add("date_to", "2015-12-31");
+string result = await Api.Tickets.List(parameters);
+~~~
+
+**Get single ticket**
+~~~
+string ticketID = "ZR8U4";
+string result = await Api.Tickets.Get(ticketID);
+~~~
+
+**Create a ticket**
+~~~
+string message = "ticket message";
+string requester = "requester@othercompany.com";
+string result = await Api.Tickets.Add(message, requester);
+~~~
+~~~
+string message = "ticket message";
+string requester = "requester@othercompany.com";
+Dictionary<string, string> parameters = new Dictionary<string, string>();
+parameters.Add("requester[name]", "Bill");
+string result = await Api.Tickets.Add(message, requester, parameters);
+~~~
+
+**Update ticket tags**
+~~~
+string ticketID = "ZR8U4";
+string[] tags = { "sales", "complaint" };
+string result = await Api.Tickets.UpdateTags(ticketID, tags);
+~~~
 
 
 ### Visitors
