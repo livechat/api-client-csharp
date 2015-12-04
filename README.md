@@ -189,6 +189,48 @@ string result = await Api.CannedResponses.Remove(responseID);
 
 [Chat REST API documentation](http://developers.livechatinc.com/rest-api/#!chats).
 
+**Start chat**
+~~~
+string visitorID = "visitor123";
+string licenseID = "123456";
+string welcomeMessage = "Hello";
+string result = await Api.Chat.StartChat(visitorID, licenseID, welcomeMessage);
+~~~
+~~~
+string visitorID = "visitor123";
+string licenseID = "123456";
+string welcomeMessage = "Hello";
+Dictionary<string, string> parameters = new Dictionary<string, string>();
+parameters.Add("name", "Barbara");
+parameters.Add("email", "barbara@othercompany.com");
+string result = await Api.Chat.StartChat(visitorID, licenseID, welcomeMessage, parameters);
+~~~
+
+**Get pending messages**
+~~~
+string visitorID = "visitor123";
+string licenseID = "123456";
+string sessionID = "CS1449238356.e911a7da96";
+string result = await Api.Chat.GetPendingMessages(visitorID, licenseID, sessionID);
+~~~
+
+**Send message**
+~~~
+string visitorID = "visitor123";
+string licenseID = "123456";
+string sessionID = "CS1449238356.e911a7da96";
+string message = "new message";
+string result = await Api.Chat.SendMessage(visitorID, licenseID, sessionID, message);
+~~~
+
+**Close chat**
+~~~
+string visitorID = "visitor123";
+string licenseID = "123456";
+string sessionID = "CS1449238356.e911a7da96";
+string result = await Api.Chat.CloseChat(visitorID, licenseID, sessionID);
+~~~
+
 
 ### Goals
 
@@ -627,10 +669,41 @@ string[] tags = { "sales", "complaint" };
 string result = await Api.Tickets.UpdateTags(ticketID, tags);
 ~~~
 
-
 ### Visitors
 
 [Visitors REST API documentation](http://developers.livechatinc.com/rest-api/#!visitors).
+
+**List all visitors**
+~~~
+string result = await Api.Visitors.List();
+~~~
+~~~
+Dictionary<string, string> parameters = new Dictionary<string, string>();
+parameters.Add("state", "chatting");
+parameters.Add("group[]", "0");
+string result = await Api.Visitors.List(parameters);
+~~~
+
+**Add custom visitor details**
+~~~
+string visitorID = "visitor123";
+string licenseID = "5164681";
+string token = "token";
+string id = "my-app";
+Dictionary<string, string> fields = new Dictionary<string, string>();
+fields.Add("name1", "value1");
+string result = await Api.Visitors.AddCustomDetails(visitorID, licenseID, token, id, fields);
+~~~
+~~~
+string visitorID = "visitor123";
+string licenseID = "5164681";
+string token = "token";
+string id = "my-app";
+Dictionary<string, string> fields = new Dictionary<string, string>();
+fields.Add("name1", "value1");
+string icon = "http://www.mycompany.com/icon.png";
+string result = await Api.Visitors.AddCustomDetails(visitorID, licenseID, token, id, fields, icon);
+~~~
 
 ### Webhooks
 
