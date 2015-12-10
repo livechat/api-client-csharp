@@ -12,7 +12,8 @@ namespace LiveChatApiExample
 
         public ApiExample()
         {
-            Api = new LiveChatApi.Api("username@mycompany.com", "API_KEY");
+            //Provide your login and API key.
+            Api = new LiveChatApi.Api("username@mycompany.com", "API_KEY");  
         }
 
         public void Start()
@@ -142,7 +143,7 @@ namespace LiveChatApiExample
             Console.ReadLine();
 
             Console.WriteLine("Reset Api key");
-            result = await Api.Agents.ResetApiKey(login);
+            result = await Api.Agents.ResetApiKey(login);    //The agent can only change his own API key.
             Console.WriteLine(result);
 
             Console.ReadLine();
