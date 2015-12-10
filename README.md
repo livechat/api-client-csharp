@@ -23,10 +23,10 @@ More information: http://developers.livechatinc.com/rest-api/#authentication
 Installation
 ------------
 
-1. Clone the repository
-2. Copy LiveChatApi project into your Solution folder
-3. Right-click on your Solution in Solution Explorer and add existing project
-4. Add a reference to LiveChatApi in your project's References
+1. Download the repository
+2. Copy the LiveChatApi project into your Solution folder
+3. Right-click on your solution in Solution Explorer and add existing LiveChatApi project
+4. Add a reference to the LiveChatApi in your project's References
 
 Usage
 ------------
@@ -191,13 +191,13 @@ string result = await Api.CannedResponses.Remove(responseID);
 
 **Start chat**
 ~~~
-string visitorID = "visitor123";
+string visitorID = "S1415110640.63935a25f1";
 string licenseID = "123456";
 string welcomeMessage = "Hello";
 string result = await Api.Chat.StartChat(visitorID, licenseID, welcomeMessage);
 ~~~
 ~~~
-string visitorID = "visitor123";
+string visitorID = "S1415110640.63935a25f1";
 string licenseID = "123456";
 string welcomeMessage = "Hello";
 Dictionary<string, string> parameters = new Dictionary<string, string>();
@@ -208,7 +208,7 @@ string result = await Api.Chat.StartChat(visitorID, licenseID, welcomeMessage, p
 
 **Get pending messages**
 ~~~
-string visitorID = "visitor123";
+string visitorID = "S1415110640.63935a25f1";
 string licenseID = "123456";
 string sessionID = "CS1449238356.e911a7da96";
 string result = await Api.Chat.GetPendingMessages(visitorID, licenseID, sessionID);
@@ -216,7 +216,7 @@ string result = await Api.Chat.GetPendingMessages(visitorID, licenseID, sessionI
 
 **Send message**
 ~~~
-string visitorID = "visitor123";
+string visitorID = "S1415110640.63935a25f1";
 string licenseID = "123456";
 string sessionID = "CS1449238356.e911a7da96";
 string message = "new message";
@@ -225,7 +225,7 @@ string result = await Api.Chat.SendMessage(visitorID, licenseID, sessionID, mess
 
 **Close chat**
 ~~~
-string visitorID = "visitor123";
+string visitorID = "S1415110640.63935a25f1";
 string licenseID = "123456";
 string sessionID = "CS1449238356.e911a7da96";
 string result = await Api.Chat.CloseChat(visitorID, licenseID, sessionID);
@@ -250,7 +250,7 @@ string result = await Api.Goals.Get(goalID);
 **Mark goal as successful**
 ~~~
 string goalID = "7601";
-string visitorID = "visitor1";
+string visitorID = "S1415110640.63935a25f1";
 string result = await Api.Goals.MarkAsSuccessful(goalID, visitorID);
 ~~~
 
@@ -686,18 +686,18 @@ string result = await Api.Visitors.List(parameters);
 
 **Add custom visitor details**
 ~~~
-string visitorID = "visitor123";
-string licenseID = "5164681";
-string token = "token";
+string visitorID = "S1415110640.63935a25f1";
+string licenseID = "123456";
+string token = "26132406c42c96ba61ed42689b70f711";
 string id = "my-app";
 Dictionary<string, string> fields = new Dictionary<string, string>();
 fields.Add("name1", "value1");
 string result = await Api.Visitors.AddCustomDetails(visitorID, licenseID, token, id, fields);
 ~~~
 ~~~
-string visitorID = "visitor123";
-string licenseID = "5164681";
-string token = "token";
+string visitorID = "S1415110640.63935a25f1";
+string licenseID = "123456";
+string token = "26132406c42c96ba61ed42689b70f711";
 string id = "my-app";
 Dictionary<string, string> fields = new Dictionary<string, string>();
 fields.Add("name1", "value1");
@@ -709,3 +709,21 @@ string result = await Api.Visitors.AddCustomDetails(visitorID, licenseID, token,
 
 [Webhooks REST API documentation](https://developers.livechatinc.com/rest-api/#!webhooks).
 
+**Display configured webhooks**
+~~~
+string result = await Api.Webhooks.List();
+~~~
+
+**Create a new webhook**
+~~~
+string eventType = "chat_started";
+string[] dataTypes = { "chat", "visitor" };
+string url = "http://www.mycompany.com/parse_webhook.php";
+string result = await Api.Webhooks.Add(eventType, dataTypes, url);
+~~~
+
+**Delete a webhook**
+~~~
+string webhookID = "39612eee5f1b431217aafb9de19c1e31";
+string result = await Api.Webhooks.Remove(webhookID);
+~~~
