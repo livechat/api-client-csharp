@@ -24,7 +24,7 @@ Installation
 ------------
 
 1. Download the repository
-2. Copy the LiveChatApi project into your Solution folder
+2. Copy the LiveChatApi project folder into your solution folder
 3. Right-click on your solution in Solution Explorer and add existing LiveChatApi project
 4. Add a reference to the LiveChatApi in your project's References
 
@@ -39,10 +39,10 @@ public class ApiExample
     public ApiExample()
     {
         Api = new LiveChatApi.Api("username@mycompany.com", "API_KEY");
-        GetAgents().Wait()
+        GetAgents().Wait();
     }
     
-    public async void GetAgents()
+    public async Task GetAgents()
     {
         string result = await Api.Agents.List();
         Console.WriteLine(result);
