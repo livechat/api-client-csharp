@@ -12,7 +12,7 @@ namespace LiveChatApiExample
 
         public ApiExample()
         {
-            Api = new LiveChatApi.Api("k.gorski+2014102701@livechatinc.com", "32951c1f63624fa94cf5320142d85842");
+            Api = new LiveChatApi.Api("username@mycompany.com", "API_KEY");
         }
 
         public void Start()
@@ -116,7 +116,7 @@ namespace LiveChatApiExample
             Console.ReadLine();
 
             Console.WriteLine("Get agent");
-            string login = "k.gorski+2014102701@livechatinc.com";
+            string login = "robert@mycompany.com";
             result = await Api.Agents.Get(login);
             Console.WriteLine(result);
 
@@ -124,7 +124,7 @@ namespace LiveChatApiExample
 
             Console.WriteLine("Add agent"); 
             Dictionary<string, string> props = new Dictionary<string, string>();
-            props.Add("login", "k.gorski+2015103102@livechatinc.com");
+            props.Add("login", "john@mycompany.com");
             props.Add("name", "John");
             result = await Api.Agents.Add(props);
             Console.WriteLine(result);
@@ -132,7 +132,7 @@ namespace LiveChatApiExample
             Console.ReadLine();
 
             Console.WriteLine("Update agent");
-            login = "k.gorski+2015103102@livechatinc.com";
+            login = "john@mycompany.com";
             props.Clear();
             props.Add("login_status", "not accepting chats");
             props.Add("max_chats_count", "2");
@@ -173,7 +173,7 @@ namespace LiveChatApiExample
             Console.ReadLine();
 
             Console.WriteLine("Send chat transcript");
-            string email = "k.gorski@livechatinc.com";
+            string email = "john@mycompany.com";
             result = await Api.Archives.SendTranscript(chatID, email);
             Console.WriteLine(result);
 
@@ -228,8 +228,8 @@ namespace LiveChatApiExample
         public async Task ChatTest()
         {
             Console.WriteLine("Start chat");
-            string visitorID = "visitor123";
-            string licenseID = "5164681";
+            string visitorID = "S1415110640.63935a25f1";
+            string licenseID = "123456";
             string welcomeMessage = "Hello";
             string result = await Api.Chat.StartChat(visitorID, licenseID, welcomeMessage);
             Console.WriteLine(result);
@@ -273,7 +273,7 @@ namespace LiveChatApiExample
             Console.ReadLine();
 
             Console.WriteLine("Mark goal as successful");
-            string visitorID = "visitor1";
+            string visitorID = "S1415110640.63935a25f1";
             result = await Api.Goals.MarkAsSuccessful(goalID, visitorID);
             Console.WriteLine(result);
 
@@ -368,7 +368,7 @@ namespace LiveChatApiExample
 
             Console.WriteLine("Add group");
             string name = "new_group";
-            string[] agents = { "k.gorski+2014102701@livechatinc.com" };
+            string[] agents = { "john@mycompany.com" };
             result = await Api.Groups.Add(name, agents);
             Console.WriteLine(result);
 
@@ -376,7 +376,7 @@ namespace LiveChatApiExample
 
             Console.WriteLine("Update group");
             groupID = "1";
-            string[] agents2 = { "k.gorski+2014102701@livechatinc.com" };
+            string[] agents2 = { "john@mycompany.com" };
             result = await Api.Groups.Update(groupID, agents2);
             Console.WriteLine(result);
 
@@ -534,7 +534,7 @@ namespace LiveChatApiExample
             Console.ReadLine();
 
             Console.WriteLine("Add tag");
-            string author = "k.gorski+2014102701@livechatinc.com";
+            string author = "john@mycompany.com";
             string tag = "support";
             string groupID = "1";
             result = await Api.Tags.Add(author, tag, groupID);
@@ -591,6 +591,18 @@ namespace LiveChatApiExample
             string result = await Api.Visitors.List();
             Console.WriteLine(result);
 
+            Console.ReadLine();
+
+            Console.WriteLine("Add custom details");
+            string visitorID = "S1415110640.63935a25f1";
+            string licenseID = "123456";
+            string token = "bad02a95a61a44bd466b9cdd262ac6a0";
+            string id = "my-app";
+            Dictionary<string, string> fields = new Dictionary<string, string>();
+            fields.Add("name1", "value1");
+            result = await Api.Visitors.AddCustomDetails(visitorID, licenseID, token, id, fields);
+            Console.WriteLine(result);
+
             Console.WriteLine("");
         }
 
@@ -598,6 +610,22 @@ namespace LiveChatApiExample
         {
             Console.WriteLine("Get webhooks"); 
             string result = await Api.Webhooks.List();
+            Console.WriteLine(result);
+
+            Console.ReadLine();
+
+            Console.WriteLine("Add webhook");
+            string eventType = "chat_started";
+            string[] dataTypes = { "chat", "visitor" };
+            string url = "http://www.mycompany.com/parse_webhook.php";
+            result = await Api.Webhooks.Add(eventType, dataTypes, url);
+            Console.WriteLine(result);
+
+            Console.ReadLine();
+
+            Console.WriteLine("Remove webhooks");
+            string webhookID = "4e713ec50972bfd96b6510be6d5b8238";
+            result = await Api.Webhooks.Remove(webhookID);
             Console.WriteLine(result);
 
             Console.WriteLine("");
