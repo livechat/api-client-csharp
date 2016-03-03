@@ -20,6 +20,7 @@ namespace LiveChatApi
             };
             Client.DefaultRequestHeaders.Add("x-api-version", "2");
             Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            Client.DefaultRequestHeaders.UserAgent.ParseAdd("LiveChatApiClientCSharp/1.0.1");
             
             string credentials = string.Format("{0}:{1}", login, apiKey);
             Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(System.Text.ASCIIEncoding.ASCII.GetBytes(credentials)));           

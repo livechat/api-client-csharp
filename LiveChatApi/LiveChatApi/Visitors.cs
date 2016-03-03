@@ -48,7 +48,7 @@ namespace LiveChatApi
                 int i = 0;
                 foreach (var keyValuePair in fields)
                 {
-                    content += string.Format("&field[{0}][{1}]={2}", i, HttpUtility.UrlEncode(keyValuePair.Key), HttpUtility.UrlEncode(keyValuePair.Value));
+                    content += string.Format("&fields[{0}][name]={1}&fields[{0}][value]={2}", i, HttpUtility.UrlEncode(keyValuePair.Key), HttpUtility.UrlEncode(keyValuePair.Value));
                     i++;
                 }
             }
