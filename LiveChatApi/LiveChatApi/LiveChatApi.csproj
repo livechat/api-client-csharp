@@ -52,6 +52,7 @@
     <Compile Include="Archives.cs" />
     <Compile Include="Chat.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Field.cs" />
     <Compile Include="Goals.cs" />
     <Compile Include="Greetings.cs" />
     <Compile Include="Groups.cs" />

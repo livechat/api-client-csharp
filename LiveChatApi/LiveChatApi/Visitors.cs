@@ -39,16 +39,24 @@ namespace LiveChatApi
             return await Api.Get(uri);
         }
 
-        public async Task<string> AddCustomDetails(string visitorID, string licenseID, string token, string id, Dictionary<string, string> fields, string icon = "")
+        public async Task<string> AddCustomDetails(string visitorID, string licenseID, string token, string id, IEnumerable<Field> fields, string icon = "")
         {
             string uri = string.Format("visitors/{0}/details", HttpUtility.UrlEncode(visitorID));
             string content = string.Format("license_id={0}&token={1}&id={2}", HttpUtility.UrlEncode(licenseID), HttpUtility.UrlEncode(token), HttpUtility.UrlEncode(id));
-            if (fields != null && fields.Count > 0)
+            if (fields != null && fields.Count() > 0)
             {
                 int i = 0;
-                foreach (var keyValuePair in fields)
+                foreach (var field in fields)
                 {
-                    content += string.Format("&fields[{0}][name]={1}&fields[{0}][value]={2}", i, HttpUtility.UrlEncode(keyValuePair.Key), HttpUtility.UrlEncode(keyValuePair.Value));
+                    string encodedName = HttpUtility.UrlEncode(field.Name);
+                    string encodedValue = HttpUtility.UrlEncode(field.Value);
+                    string encodedUrl = HttpUtility.UrlEncode(field.Url);
+
+                    if (String.IsNullOrWhiteSpace(field.Url))
+                        content += string.Format("&fields[{0}][name]={1}&fields[{0}][value]={2}", i, encodedName, encodedValue);
+                    else
+                        content += string.Format("&fields[{0}][name]={1}&fields[{0}][value]={2}&fields[{0}][url]={3}", i, encodedName, encodedValue, encodedUrl);
+
                     i++;
                 }
             }

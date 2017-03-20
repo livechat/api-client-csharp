@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LiveChatApi;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -599,8 +600,8 @@ namespace LiveChatApiExample
             string licenseID = "123456";
             string token = "bad02a95a61a44bd466b9cdd262ac6a0";
             string id = "my-app";
-            Dictionary<string, string> fields = new Dictionary<string, string>();
-            fields.Add("name1", "value1");
+            List<Field> fields = new List<Field>();
+            fields.Add( new Field { Name = "name1", Value = "value1" });
             result = await Api.Visitors.AddCustomDetails(visitorID, licenseID, token, id, fields);
             Console.WriteLine(result);
 
