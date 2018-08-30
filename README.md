@@ -6,7 +6,7 @@ C# library with ready-to-use LiveChat API implementation.
 Documentation
 -------------
 
-To find out more, visit the official [LiveChat REST API documentation](http://developers.livechatinc.com/rest-api/#!introduction).
+To find out more, visit the official [LiveChat REST API documentation](https://docs.livechatinc.com/rest-api/#!introduction).
 
 Requirements
 ------------
@@ -18,7 +18,7 @@ Authentication to the API occurs via HTTP Basic Auth. Provide your:
 - login
 - API key
 
-More information: http://developers.livechatinc.com/rest-api/#authentication
+More information: https://docs.livechatinc.com/rest-api/#authentication
 
 Installation
 ------------
@@ -55,7 +55,7 @@ Available methods
 
 ### Agents
 
-[Agents REST API documentation](http://developers.livechatinc.com/rest-api/#!agents).
+[Agents REST API documentation](https://docs.livechatinc.com/rest-api/#!agents).
 
 **List all agents**
 ~~~
@@ -104,7 +104,7 @@ string result = await Api.Agents.Remove(login);
 
 ### Archives
 
-[Archives REST API documentation](https://developers.livechatinc.com/rest-api/#!archives).
+[Archives REST API documentation](https://docs.livechatinc.com/rest-api/#!archives).
 
 **Get list of chats**
 ~~~
@@ -136,7 +136,7 @@ string result = await Api.Archives.Tags(chatID, tags);
 
 ### Canned responses
 
-[Canned responses REST API documentation](http://developers.livechatinc.com/rest-api/#!canned-responses).
+[Canned responses REST API documentation](https://docs.livechatinc.com/rest-api/#!canned-responses).
 
 **List all canned responses**
 ~~~
@@ -185,56 +185,9 @@ string responseID = "3151";
 string result = await Api.CannedResponses.Remove(responseID);
 ~~~
 
-### Chat
-
-[Chat REST API documentation](http://developers.livechatinc.com/rest-api/#!chats).
-
-**Start chat**
-~~~
-string visitorID = "S1415110640.63935a25f1";
-string licenseID = "123456";
-string welcomeMessage = "Hello";
-string result = await Api.Chat.StartChat(visitorID, licenseID, welcomeMessage);
-~~~
-~~~
-string visitorID = "S1415110640.63935a25f1";
-string licenseID = "123456";
-string welcomeMessage = "Hello";
-Dictionary<string, string> parameters = new Dictionary<string, string>();
-parameters.Add("name", "Barbara");
-parameters.Add("email", "barbara@othercompany.com");
-string result = await Api.Chat.StartChat(visitorID, licenseID, welcomeMessage, parameters);
-~~~
-
-**Get pending messages**
-~~~
-string visitorID = "S1415110640.63935a25f1";
-string licenseID = "123456";
-string sessionID = "CS1449238356.e911a7da96";
-string result = await Api.Chat.GetPendingMessages(visitorID, licenseID, sessionID);
-~~~
-
-**Send message**
-~~~
-string visitorID = "S1415110640.63935a25f1";
-string licenseID = "123456";
-string sessionID = "CS1449238356.e911a7da96";
-string message = "new message";
-string result = await Api.Chat.SendMessage(visitorID, licenseID, sessionID, message);
-~~~
-
-**Close chat**
-~~~
-string visitorID = "S1415110640.63935a25f1";
-string licenseID = "123456";
-string sessionID = "CS1449238356.e911a7da96";
-string result = await Api.Chat.CloseChat(visitorID, licenseID, sessionID);
-~~~
-
-
 ### Goals
 
-[Goals REST API documentation](http://developers.livechatinc.com/rest-api/#!goals).
+[Goals REST API documentation](https://docs.livechatinc.com/rest-api/#!goals).
 
 **List all goals**
 ~~~
@@ -286,7 +239,7 @@ string result = await Api.Goals.Remove(goalID);
 
 ### Greetings
 
-[Greetings REST API documentation](https://developers.livechatinc.com/rest-api/#!greetings).
+[Greetings REST API documentation](https://docs.livechatinc.com/rest-api/#!greetings).
 
 **List all greetings**
 ~~~
@@ -352,7 +305,7 @@ string result = await Api.Greetings.Remove(greetingID);
 
 ### Groups
 
-[Groups REST API documentation](http://developers.livechatinc.com/rest-api/#!groups).
+[Groups REST API documentation](https://docs.livechatinc.com/rest-api/#!groups).
 
 **List all groups**
 ~~~
@@ -407,7 +360,7 @@ string result = await Api.Groups.Remove(groupID);
 
 ### Reports
 
-[Reports REST API documentation](http://developers.livechatinc.com/rest-api/#!reports).
+[Reports REST API documentation](https://docs.livechatinc.com/rest-api/#!reports).
 
 **Total chats**
 ~~~
@@ -588,7 +541,7 @@ string result = await Api.Reports.SimultaneousChats(weekday);
 
 ### Status
 
-[Status REST API documentation](http://developers.livechatinc.com/rest-api/#!status).
+[Status REST API documentation](https://docs.livechatinc.com/rest-api/#!status).
 
 **Get status**
 ~~~
@@ -601,7 +554,7 @@ string result = await Api.Status.Get(groupID);
 
 ### Tags
 
-[Tags REST API documentation](https://developers.livechatinc.com/rest-api/#!tags).
+[Tags REST API documentation](https://docs.livechatinc.com/rest-api/#!tags).
 
 **List all tags**
 ~~~
@@ -629,7 +582,7 @@ string result = await Api.Tags.Remove(tag, groupID);
 
 ### Tickets
 
-[Tickets REST API documentation](http://developers.livechatinc.com/rest-api/#!tickets).
+[Tickets REST API documentation](https://docs.livechatinc.com/rest-api/#!tickets).
 
 **Get list of tickets**
 ~~~
@@ -671,7 +624,7 @@ string result = await Api.Tickets.UpdateTags(ticketID, tags);
 
 ### Visitors
 
-[Visitors REST API documentation](http://developers.livechatinc.com/rest-api/#!visitors).
+[Visitors REST API documentation](https://docs.livechatinc.com/rest-api/#!visitors).
 
 **List all visitors**
 ~~~
@@ -707,7 +660,7 @@ string result = await Api.Visitors.AddCustomDetails(visitorID, licenseID, token,
 
 ### Webhooks
 
-[Webhooks REST API documentation](https://developers.livechatinc.com/rest-api/#!webhooks).
+[Webhooks REST API documentation](https://docs.livechatinc.com/rest-api/#!webhooks).
 
 **Display configured webhooks**
 ~~~
